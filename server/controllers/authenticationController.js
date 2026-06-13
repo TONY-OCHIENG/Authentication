@@ -36,7 +36,6 @@ export const loginAccount = async (request,response) => {
                     const name = result[0].name
                     const token = jwt.sign({name},"login_rtie_owp",{expiresIn:'2d'})
                     response.cookie('token',token)
-                    return response.status(200).json({status:true, name:name})
                 } else {
                     return response.status(401).json({status:false, message:"wrong credentials"})
                 }
@@ -47,4 +46,8 @@ export const loginAccount = async (request,response) => {
     } catch (error) {
         console.log(error)  
     }
+}
+
+export const homepage = async (request,response) => {
+    
 }
