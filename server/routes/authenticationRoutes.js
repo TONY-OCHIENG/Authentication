@@ -1,6 +1,7 @@
 import express from 'express'
-import { createAccount } from '../controllers/authenticationController.js'
+import { createAccount, loginAccount } from '../controllers/authenticationController.js'
 
 const authentication = express.Router()
 authentication.post('/createAccount', createAccount)
+authentication.post('/login',loginAccount)
 export default authentication

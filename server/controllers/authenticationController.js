@@ -23,7 +23,7 @@ export const createAccount = async (request,response) => {
 
 export const loginAccount = async (request,response) => {
     const { email, password} = request.body
-    if (!email || !password) {
+    if (email === "" || password === "") {
         response.status(200).json({status:false, message:"Fill all fields"})
     }
     try {
@@ -37,13 +37,13 @@ export const loginAccount = async (request,response) => {
                     const token = jwt.sign({name},"login_rtie_owp",{expiresIn:'2d'})
                     return response.status(200).json({status:true, name:name})
                 } else {
-                    return response.status(200).json({status:false, message:"wrong credentials"})
+                    return response.status(401).json({status:false, message:"wrong credentials"})
                 }
             } else {
                 return response.status(404).json({status:false, message:"user not found"})
             }
         })
     } catch (error) {
-        console.log(error)
+        console.log(error)  
     }
 }
