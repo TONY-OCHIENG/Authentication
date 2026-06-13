@@ -27,7 +27,6 @@ function Login() {
         }))
     }
 
-    console.log(loginDetails)
   return (
     <div className='bg-gray-100 px-3 w-full h-[100vh] flex justify-center items-center'>
         <div className='w-full md:w-[40%] shadow-md p-4 rounded-md bg-white '>
