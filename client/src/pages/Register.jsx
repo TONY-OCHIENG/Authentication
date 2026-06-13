@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import axios from 'axios'
 
 function Register() {
   const [registerDetails, setRegisterDetails] = useState({
@@ -7,8 +8,17 @@ function Register() {
     email:'',
     password:''
   })
+  const [message,setMessage] = useState('')
+  const navigate = useNavigate()
   const handleSubmit = (event) => {
     event.preventDefault()
+    axios.post('http://localhost:3000/auth/createAccount',registerDetails)
+    .then((result) => {
+      if (!result.data.status) {
+         setMessage(result.data.message)
+      }
+    })
+    .catch(error => console.log(error))
   }
   const handleValues = (event) => {
     const { name, value} = event.target
@@ -17,11 +27,15 @@ function Register() {
       [name]:value
     }))
   }
-  console.log(registerDetails)
+  setTimeout(() => {setMessage('')},1000)
+                  
   return (
     <div className='bg-gray-100 px-3 w-full h-[100vh] flex justify-center items-center'>
         <div className='w-full md:w-[40%] shadow-md p-4 rounded-md bg-white '>
             <form action="" onSubmit={handleSubmit} className='w-full'>
+               {               
+                <p className='text-sm font-bold text-red-700'>{message}</p>
+               }
                 <label htmlFor="name">Name</label>
                 <input type="text" onChange={handleValues} className='w-full p-2 rounded-md border mb-3' id='name' name='name'/>
                 <label htmlFor="email">Email</label>
