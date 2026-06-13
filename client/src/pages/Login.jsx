@@ -1,14 +1,23 @@
+import axios from 'axios'
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 function Login() {
     const [loginDetails,setLoginDetails] = useState({
         email:'',
         password:''
     })
+    const navigate = useNavigate()
+    axios.defaults.withCredentials = true
     const handleLogin = (event) => {
         event.preventDefault()
-    
+        axios.post('http://localhost:3000/auth/login',loginDetails)
+        .then((result) => {
+            if (result.data.status) {
+                navigate("/")
+            }
+        })
+        .catch((error) => console.log(error))
     }
     const handleValues = (event) => {
         const { name, value } = event.target 
