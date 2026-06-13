@@ -14,4 +14,4 @@ app.use('/auth',authentication)
 
 app.listen(process.env.PORT,() => {
     console.log("Server is running")
-})
+}) 
