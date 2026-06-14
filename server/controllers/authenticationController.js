@@ -41,13 +41,13 @@ export const loginAccount = async (request,response) => {
                 }
             } else {
                 return response.status(404).json({status:false, message:"user not found"})
-            }
+            } 
         })
     } catch (error) {
         console.log(error)  
     }
 }
 
-export const homepage = async (request,response) => {
-    
+export const username = async (request,response) => {
+    return response.status(200).json({status:true, name: request.name})
 }
